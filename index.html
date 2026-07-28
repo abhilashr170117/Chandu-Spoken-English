@@ -17,9 +17,8 @@
     <header class="bg-gradient-to-r from-teal-600 via-cyan-600 to-indigo-600 text-white p-4 shadow-lg sticky top-0 z-50 backdrop-blur-md bg-opacity-95">
         <div class="max-w-6xl mx-auto flex justify-between items-center">
             <div class="flex items-center gap-3">
-                <div class="bg-white text-teal-700 font-extrabold px-3 py-1.5 rounded-xl shadow-md tracking-wider text-base uppercase border-2 border-teal-600">
-                    Dhanapal
-                </div>
+                <img src="teacher.jpg" alt="Dhanapal" class="w-10 h-10 rounded-full object-cover border-2 border-teal-600 shadow-md">
+                <!-- If you don't have a teacher image yet, place it at assets/teacher.jpg or update the src to your image path -->
                 <h1 class="text-lg font-extrabold tracking-tight hidden sm:block">
                     <span class="lang-en">Sri Chandu Spoken English</span>
                     <span class="lang-te hidden">శ్రీ చందు స్పోకెన్ ఇంగ్లీష్</span>
@@ -62,16 +61,11 @@
                 </button>
                 <button onclick="openAdminModal()" class="bg-slate-900/40 text-white px-2.5 py-1 rounded-full text-xs">🔒 Admin</button>
             </div>
-
-            <div id="user-info" class="hidden text-sm flex items-center gap-4">
-                <span id="user-email" class="font-medium bg-white/10 px-3 py-1 rounded-full"></span>
-                <button onclick="logout()" class="bg-rose-500/80 px-3 py-1 rounded-full hover:bg-rose-600 transition font-medium">Logout</button>
-            </div>
         </div>
     </header>
 
     <!-- FLOATING STICKY REGISTER BUTTON -->
-    <div class="fixed bottom-6 right-6 z-40 animate-bounce">
+    <div id="floating-register-button" class="fixed bottom-6 right-6 z-40 animate-bounce">
         <a href="#register" class="bg-gradient-to-r from-teal-600 to-cyan-600 text-white font-extrabold px-6 py-3.5 rounded-full shadow-2xl flex items-center gap-2 hover:opacity-95 transition border border-white/20">
             <span>✨</span> 
             <span class="lang-en">Register Now</span>
@@ -144,6 +138,13 @@
                 <form id="auth-form" onsubmit="handleAuth(event)" class="space-y-4">
                     <div>
                         <label class="block text-xs font-bold text-slate-600 uppercase mb-1">
+                            <span class="lang-en">Full Name</span>
+                            <span class="lang-te hidden">పూర్తి పేరు</span>
+                        </label>
+                        <input type="text" id="name" required placeholder="Your Name" class="w-full p-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:outline-none bg-white shadow-sm transition text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 uppercase mb-1">
                             <span class="lang-en">Email Address</span>
                             <span class="lang-te hidden">ఇమెయిల్ చిరునామా</span>
                         </label>
@@ -194,6 +195,18 @@
                             </option>
                         </select>
                     </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 uppercase mb-1">
+                                <span class="lang-en">Interested In</span>
+                                <span class="lang-te hidden">ఏదిలో ఆసక్తి</span>
+                            </label>
+                            <select id="interest" class="w-full p-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:outline-none bg-white shadow-sm transition text-sm">
+                                <option value="">Select option</option>
+                                <option value="home_tuition">Home Tuition</option>
+                                <option value="online_class">Online Class</option>
+                                <option value="offline_institute">Offline (In Institute)</option>
+                            </select>
+                        </div>
                     <div id="other-category-box" class="hidden">
                         <label class="block text-xs font-bold text-slate-600 uppercase mb-1">
                             <span class="lang-en">Specify Other Category</span>
@@ -210,42 +223,10 @@
                     </div>
                     
                     <button type="submit" class="w-full bg-gradient-to-r from-teal-600 to-cyan-600 text-white p-3.5 rounded-xl font-bold hover:opacity-95 transition shadow-md shadow-teal-600/20 text-sm">
-                        <span class="lang-en">Register & Access Portal</span>
-                        <span class="lang-te hidden">నమోదు చేసుకోండి & పోర్టల్‌ని యాక్సెస్ చేయండి</span>
+                        <span class="lang-en">Register Now</span>
+                        <span class="lang-te hidden">ఇప్పుడు నమోదు చేసుకోండి</span>
                     </button>
                 </form>
-            </div>
-        </section>
-
-        <!-- STUDENT DASHBOARD -->
-        <section id="dashboard-section" class="hidden bg-gradient-to-br from-teal-500 to-cyan-600 text-white p-8 md:p-10 rounded-3xl shadow-xl space-y-6">
-            <div class="space-y-2">
-                <span class="bg-white/20 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-                    <span class="lang-en">Student Portal</span>
-                    <span class="lang-te hidden">విద్యార్థి పోర్టల్</span>
-                </span>
-                <h2 class="text-3xl font-bold">
-                    <span class="lang-en">Welcome Back to Class!</span>
-                    <span class="lang-te hidden">తరగతికి తిరిగి స్వాగతం!</span>
-                </h2>
-                <p class="text-teal-100">
-                    <span class="lang-en">Access your daily live sessions and course materials below.</span>
-                    <span class="lang-te hidden">మీ రోజువారీ లైవ్ సెషన్‌లు మరియు కోర్స్ మెటీరియల్‌లను క్రింద యాక్సెస్ చేయండి.</span>
-                </p>
-            </div>
-            <div class="bg-white text-slate-800 p-6 rounded-2xl shadow-lg inline-block space-y-3">
-                <h3 class="font-bold text-lg text-teal-900">
-                    <span class="lang-en">Live Class Room Access</span>
-                    <span class="lang-te hidden">లైవ్ క్లాస్ రూమ్ యాక్సెస్</span>
-                </h3>
-                <p class="text-sm text-slate-500">
-                    <span class="lang-en">Batch Schedule: Daily Classes & Flexible Timings</span>
-                    <span class="lang-te hidden">బ్యాచ్ షెడ్యూల్: రోజువారీ తరగతులు & అనువైన సమయాలు</span>
-                </p>
-                <a href="#" target="_blank" class="inline-block bg-gradient-to-r from-teal-600 to-cyan-600 text-white text-sm font-bold px-5 py-2.5 rounded-xl shadow hover:opacity-95 transition">
-                    <span class="lang-en">Join Live Interactive Session</span>
-                    <span class="lang-te hidden">లైవ్ ఇంటరాక్టివ్ సెషన్‌లో చేరండి</span>
-                </a>
             </div>
         </section>
 
@@ -479,7 +460,7 @@
         <section id="teacher" class="bg-white p-8 md:p-12 rounded-3xl shadow-lg border border-slate-100">
             <div class="flex flex-col md:flex-row gap-10 items-center">
                 <div class="w-52 h-52 rounded-3xl bg-slate-100 overflow-hidden flex-shrink-0 border-4 border-teal-100 shadow-xl relative group">
-                    <img id="teacher-img" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400" alt="Dhanapal" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                    <img id="teacher-img" src="teacher.jpg" alt="Dhanapal" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
                 </div>
                 <div class="space-y-4 text-center md:text-left flex-grow">
                     <span class="text-xs font-bold text-teal-700 bg-teal-50 px-3.5 py-1.5 rounded-full uppercase tracking-wider">
@@ -514,7 +495,10 @@
                     <h2 class="text-2xl font-extrabold text-rose-600">🔒 Admin Dashboard & Analytics</h2>
                     <p class="text-slate-500 text-sm">Real-time breakdown of student enrollments, categories, and regional distribution.</p>
                 </div>
-                <button onclick="loadAdminData()" class="bg-slate-900 text-white text-xs px-4 py-2.5 rounded-xl font-bold hover:bg-slate-800 transition shadow">Refresh Analytics</button>
+                <div class="flex flex-wrap items-center gap-3">
+                    <button onclick="loadAdminData()" class="bg-slate-900 text-white text-xs px-4 py-2.5 rounded-xl font-bold hover:bg-slate-800 transition shadow">Refresh Analytics</button>
+                    <button onclick="exitAdminDashboard()" class="bg-rose-500 text-white text-xs px-4 py-2.5 rounded-xl font-bold hover:bg-rose-600 transition shadow">Back to site</button>
+                </div>
             </div>
 
             <!-- ANALYTICS CARDS -->
@@ -535,6 +519,7 @@
                     <table class="w-full text-left border-collapse text-sm">
                         <thead>
                             <tr class="bg-slate-50 border-b border-slate-200 text-slate-600">
+                                <th class="p-4">Name</th>
                                 <th class="p-4">Email</th>
                                 <th class="p-4">Phone</th>
                                 <th class="p-4">Category</th>
@@ -559,7 +544,7 @@
             <div class="space-y-3">
                 <div>
                     <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Password</label>
-                    <input type="password" id="admin-pass-input" placeholder="Admin@123" class="w-full p-3 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                    <input type="password" id="admin-pass-input" class="w-full p-3 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-teal-500 focus:outline-none">
                 </div>
             </div>
             <div class="flex justify-end gap-3 pt-2">
@@ -735,13 +720,6 @@
                 document.getElementById('lang-btn-mobile').innerText = 'English';
             }
 
-            const loggedStudent = localStorage.getItem('logged_student');
-            if (loggedStudent) {
-                document.getElementById('register').classList.add('hidden');
-                document.getElementById('dashboard-section').classList.remove('hidden');
-                document.getElementById('user-info').classList.remove('hidden');
-                document.getElementById('user-email').innerText = loggedStudent;
-            }
             loadTeacherProfile();
             updateCarousel();
         });
@@ -758,20 +736,26 @@
 
         async function handleAuth(event) {
             event.preventDefault();
+            const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const phone = document.getElementById('phone').value;
             const region = document.getElementById('region').value;
             let category = document.getElementById('category').value;
+            let other_category = null;
             if (category === 'Others') {
-                category = document.getElementById('other-category-text').value || 'Others';
+                other_category = document.getElementById('other-category-text').value || 'Others';
             }
+            const interest = document.getElementById('interest').value;
             const description = document.getElementById('description').value;
 
             const { error } = await supabaseClient.from('profiles').insert([{ 
+                name,
                 email, 
                 phone, 
                 region, 
                 category, 
+                other_category,
+                interest,
                 description 
             }]);
 
@@ -780,12 +764,7 @@
                 return;
             }
 
-            alert('Registration successful! Welcome to Sri Chandu Spoken English.');
-            document.getElementById('register').classList.add('hidden');
-            document.getElementById('dashboard-section').classList.remove('hidden');
-            document.getElementById('user-info').classList.remove('hidden');
-            document.getElementById('user-email').innerText = email;
-            localStorage.setItem('logged_student', email);
+            alert('Registration successful! The tutor will contact you soon to share more details.');
         }
 
         function logout() {
@@ -805,13 +784,29 @@
             const pass = document.getElementById('admin-pass-input').value;
             if (pass === ADMIN_SECRET_PASSWORD) {
                 closeAdminModal();
+                document.querySelectorAll('main > *').forEach(section => {
+                    if (section.id !== 'admin-section') {
+                        section.classList.add('hidden');
+                    }
+                });
+                document.querySelectorAll('header, footer, #floating-register-button').forEach(el => el.classList.add('hidden'));
                 document.getElementById('admin-section').classList.remove('hidden');
                 document.getElementById('admin-edit-trigger').classList.remove('hidden');
                 loadAdminData();
-                alert('Admin Login Successful!');
+                alert('Admin login successful.');
             } else {
-                alert('Incorrect Admin Password! (Use Admin@123)');
+                alert('Incorrect login credentials.');
             }
+        }
+
+        function exitAdminDashboard() {
+            document.querySelectorAll('main > *').forEach(section => {
+                if (section.id !== 'admin-section') {
+                    section.classList.remove('hidden');
+                }
+            });
+            document.querySelectorAll('header, footer, #floating-register-button').forEach(el => el.classList.remove('hidden'));
+            document.getElementById('admin-section').classList.add('hidden');
         }
 
         async function loadAdminData() {
@@ -831,6 +826,7 @@
                 const tr = document.createElement('tr');
                 tr.className = 'border-b border-slate-50 hover:bg-slate-50/50';
                 tr.innerHTML = `
+                    <td class="p-4 font-medium text-slate-900">${student.name || 'N/A'}</td>
                     <td class="p-4 font-medium text-slate-900">${student.email || 'N/A'}</td>
                     <td class="p-4 text-slate-600">${student.phone || 'N/A'}</td>
                     <td class="p-4"><span class="bg-teal-50 text-teal-700 px-2.5 py-1 rounded-full text-xs font-semibold">${student.category || 'N/A'}</span></td>
