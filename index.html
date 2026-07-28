@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sri Chandu Spoken English - Nellore</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-teal-500 selection:text-white" data-lang="en">
+
+    <!-- Navbar with Institute Logo, Language Switcher & Admin Login -->
+    <header class="bg-gradient-to-r from-teal-600 via-cyan-600 to-indigo-600 text-white p-4 shadow-lg sticky top-0 z-50 backdrop-blur-md bg-opacity-95">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="bg-white text-teal-700 font-extrabold px-3 py-1.5 rounded-xl shadow-md tracking-wider text-base uppercase border-2 border-teal-600">
+                    CHANDU
+                </div>
+                <h1 class="text-lg font-extrabold tracking-tight hidden sm:block">
+                    <span class="lang-en">Sri Chandu Spoken English</span>
+                    <span class="lang-te hidden">శ్రీ చందు స్పోకెన్ ఇంగ్లీష్</span>
+                </h1>
+            </div>
+            
+            <nav class="hidden md:flex gap-5 text-sm font-semibold items-center">
+                <a href="#about" class="hover:text-teal-200 transition">
+                    <span class="lang-en">About</span>
+                    <span class="lang-te hidden">మా గురించి</span>
+                </a>
+                <a href="#courses" class="hover:text-teal-200 transition">
+                    <span class="lang-en">Courses</span>
+                    <span class="lang-te hidden">కోర్సులు</span>
+                </a>
+                <a href="#gallery" class="hover:text-teal-200 transition">
+                    <span class="lang-en">Gallery</span>
+                    <span class="lang-te hidden">గ్యాలరీ</span>
+                </a>
+                <a href="#teacher" class="hover:text-teal-200 transition">
+                    <span class="lang-en">Instructor</span>
+                    <span class="lang-te hidden">ఇన్‌స్ట్రక్టర్</span>
+                </a>
+                
+                <!-- Language Toggle Button -->
+                <button onclick="toggleLanguage()" id="lang-toggle-btn" class="bg-white/20 hover:bg-white/30 text-white border border-white/40 px-3 py-1 rounded-full font-bold text-xs transition flex items-center gap-1.5">
+                    🌐 <span id="lang-btn-text">తెలుగు (Telugu)</span>
+                </button>
+
+                <a href="#register" class="bg-white text-teal-700 px-4 py-1.5 rounded-full font-bold shadow-sm hover:bg-teal-50 transition">
+                    <span class="lang-en">Register</span>
+                    <span class="lang-te hidden">నమోదు</span>
+                </a>
+                <button onclick="openAdminModal()" class="bg-slate-900/40 text-teal-100 border border-white/30 px-3.5 py-1.5 rounded-full font-bold hover:bg-slate-900/70 transition text-xs">🔒 Admin</button>
+            </nav>
+
+            <div class="flex md:hidden items-center gap-2">
+                <button onclick="toggleLanguage()" class="bg-white/20 text-white px-2.5 py-1 rounded-full font-bold text-xs">
+                    <span id="lang-btn-mobile">తెలుగు</span>
+                </button>
+                <button onclick="openAdminModal()" class="bg-slate-900/40 text-white px-2.5 py-1 rounded-full text-xs">🔒 Admin</button>
+            </div>
+
+            <div id="user-info" class="hidden text-sm flex items-center gap-4">
+                <span id="user-email" class="font-medium bg-white/10 px-3 py-1 rounded-full"></span>
+                <button onclick="logout()" class="bg-rose-500/80 px-3 py-1 rounded-full hover:bg-rose-600 transition font-medium">Logout</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- FLOATING STICKY REGISTER BUTTON -->
+    <div class="fixed bottom-6 right-6 z-40 animate-bounce">
+        <a href="#register" class="bg-gradient-to-r from-teal-600 to-cyan-600 text-white font-extrabold px-6 py-3.5 rounded-full shadow-2xl flex items-center gap-2 hover:opacity-95 transition border border-white/20">
+            <span>✨</span> 
+            <span class="lang-en">Register Now</span>
+            <span class="lang-te hidden">ఇప్పుడే నమోదు చేసుకోండి</span>
+        </a>
+    </div>
+
+    <main class="max-w-6xl mx-auto px-4 py-10 space-y-20">
+        
+        <!-- HERO & REGISTRATION SECTION -->
+        <section id="register" class="grid md:grid-cols-2 gap-10 items-center bg-white p-8 md:p-12 rounded-3xl shadow-xl shadow-teal-900/5 border border-teal-100/50 relative overflow-hidden">
+            <div class="absolute -right-20 -top-20 w-72 h-72 bg-gradient-to-br from-teal-400/10 to-cyan-400/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="space-y-6">
+                <span class="bg-gradient-to-r from-teal-500 to-cyan-500 text-white text-xs font-bold px-3.5 py-1.5 rounded-full uppercase tracking-wider shadow-sm">Cell: 9963951240, 9052052715</span>
+                
+                <div class="space-y-2">
+                    <h2 class="text-3xl md:text-5xl font-extrabold text-slate-900 leading-tight">
+                        <span class="lang-en">Sri Chandu Spoken English</span>
+                        <span class="lang-te hidden">శ్రీ చందు స్పోకెన్ ఇంగ్లీష్</span>
+                    </h2>
+                    <p class="text-teal-700 font-bold text-lg">
+                        <span class="lang-en">Let's Learn English...</span>
+                        <span class="lang-te hidden">ఇంగ్లీష్ నేర్చుకుందాం...</span>
+                    </p>
+                </div>
+
+                <blockquote class="bg-teal-50/70 border-l-4 border-teal-500 p-4 rounded-r-xl text-slate-700 italic text-sm space-y-1">
+                    <p class="font-semibold text-slate-900 not-italic lang-en">"English has become a part of everyone's life. Even with knowledge, doubts remain!"</p>
+                    <p class="font-semibold text-slate-900 not-italic lang-te hidden">"ఆంగ్లం అందరి జీవితాల్లో భాగమైపోయింది. ఎంత తెలిసినా ఇంకా ఏదో సందేహం!"</p>
+                </blockquote>
+
+                <!-- Key Questions -->
+                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-xs text-slate-600 space-y-1.5">
+                    <p class="font-bold text-slate-800 mb-1">
+                        <span class="lang-en">Common Doubts Addressed Here</span>
+                        <span class="lang-te hidden">మీకు ఈ సందేహాలు ఉన్నాయಾ?</span>
+                    </p>
+                    <p class="lang-en">• Where to start? How to read?</p>
+                    <p class="lang-te hidden">• ఎక్కడ ప్రారంభించాలి? ఎలా చదవాలి?</p>
+
+                    <p class="lang-en">• How to grow vocabulary?</p>
+                    <p class="lang-te hidden">• పద సంపదను పెంచుకోవడమేలా?</p>
+
+                    <p class="lang-en">• How to use new words?</p>
+                    <p class="lang-te hidden">• కొత్త పద ప్రయోగాలు తెలుసుకోవడమేలా?</p>
+
+                    <p class="lang-en">• How to clear tricky grammar rules?</p>
+                    <p class="lang-te hidden">• ఎంతకూ అంతు చిక్కని గ్రామర్ గొడవ తీరేదేలా?</p>
+
+                    <p class="lang-en">• How much time is needed to learn Spoken English?</p>
+                    <p class="lang-te hidden">• స్పోకెన్ ఇంగ్లీష్ నేర్చుకోవడానికి ఎంత టైమ్ కావాలి?</p>
+                </div>
+
+                <div class="text-xs text-slate-500 font-medium">
+                    📍 <strong><span class="lang-en">Address:</span><span class="lang-te hidden">చిరునామా:</span></strong> <span class="lang-en">Chakali Street, Behind Mahalakshmi Temple, VRC Centre, NELLORE.</span><span class="lang-te hidden">చాకలి వీధి, మహాలక్ష్మి ఆలయం వెనుక, విఆర్సి సెంటర్, నెల్లూరు.</span>
+                </div>
+            </div>
+
+            <!-- Registration Form Card -->
+            <div class="bg-gradient-to-b from-slate-50 to-teal-50/30 p-8 rounded-2xl border border-teal-100 shadow-inner">
+                <h3 id="form-title" class="text-2xl font-bold text-center text-slate-900 mb-2">
+                    <span class="lang-en">Student Registration</span>
+                    <span class="lang-te hidden">విద్యార్థి నమోదు</span>
+                </h3>
+                <p class="text-xs text-center text-slate-500 mb-6">
+                    <span class="lang-en">Online Classes & Home Tuitions Available</span>
+                    <span class="lang-te hidden">ఆన్‌లైన్ క్లాసులు, హోమ్ ట్యూషన్స్ చెప్పబడును</span>
+                </p>
+                
+                <form id="auth-form" onsubmit="handleAuth(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 uppercase mb-1">
+                            <span class="lang-en">Email Address</span>
+                            <span class="lang-te hidden">ఇమెయిల్ చిరునామా</span>
+                        </label>
+                        <input type="email" id="email" required placeholder="name@example.com" class="w-full p-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:outline-none bg-white shadow-sm transition text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 uppercase mb-1">
+                            <span class="lang-en">Phone Number</span>
+                            <span class="lang-te hidden">ఫోన్ నంబర్</span>
+                        </label>
+                        <input type="text" id="phone" required placeholder="9963951240" class="w-full p-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:outline-none bg-white shadow-sm transition text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 uppercase mb-1">
+                            <span class="lang-en">Region / City</span>
+                            <span class="lang-te hidden">ప్రాంతం / నగరం</span>
+                        </label>
+                        <input type="text" id="region" required placeholder="e.g. Nellore, Hyderabad" class="w-full p-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:outline-none bg-white shadow-sm transition text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 uppercase mb-1">
+                            <span class="lang-en">I am a...</span>
+                            <span class="lang-te hidden">నేను ఒక...</span>
+                        </label>
+                        <select id="category" onchange="checkCategoryOther()" required class="w-full p-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:outline-none bg-white shadow-sm transition text-sm">
+                            <option value="">
+                                <span class="lang-en">Select your background</span>
+                            </option>
+                            <option value="Housewife">
+                                <span class="lang-en">Housewife</span>
+                                <span class="lang-te hidden">గృహిణి</span>
+                            </option>
+                            <option value="Need English for Corporate">
+                                <span class="lang-en">Need English for Corporate</span>
+                                <span class="lang-te hidden">కార్పొరేట్ ఉద్యోగం కోసం</span>
+                            </option>
+                            <option value="Student">
+                                <span class="lang-en">Student</span>
+                                <span class="lang-te hidden">విద్యార్థి</span>
+                            </option>
+                            <option value="Working Professional">
+                                <span class="lang-en">Working Professional</span>
+                                <span class="lang-te hidden">ఉద్యోగస్తులు</span>
+                            </option>
+                            <option value="Others">
+                                <span class="lang-en">Others</span>
+                                <span class="lang-te hidden">ఇతరులు</span>
+                            </option>
+                        </select>
+                    </div>
+                    <div id="other-category-box" class="hidden">
+                        <label class="block text-xs font-bold text-slate-600 uppercase mb-1">
+                            <span class="lang-en">Specify Other Category</span>
+                            <span class="lang-te hidden">ఇతర కేటగిరీని పేర్కొనండి</span>
+                        </label>
+                        <input type="text" id="other-category-text" placeholder="Please specify..." class="w-full p-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:outline-none bg-white shadow-sm transition text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 uppercase mb-1">
+                            <span class="lang-en">What are you lagging & what are you looking for?</span>
+                            <span class="lang-te hidden">మీరు దేనిలో వెనుకబడి ఉన్నారు & ఏం కోరుకుంటున్నారు?</span>
+                        </label>
+                        <textarea id="description" rows="2" required placeholder="Briefly describe your current challenge and goals..." class="w-full p-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:outline-none bg-white shadow-sm transition text-sm"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-gradient-to-r from-teal-600 to-cyan-600 text-white p-3.5 rounded-xl font-bold hover:opacity-95 transition shadow-md shadow-teal-600/20 text-sm">
+                        <span class="lang-en">Register & Access Portal</span>
+                        <span class="lang-te hidden">నమోదు చేసుకోండి & పోర్టల్‌ని యాక్సెస్ చేయండి</span>
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- STUDENT DASHBOARD -->
+        <section id="dashboard-section" class="hidden bg-gradient-to-br from-teal-500 to-cyan-600 text-white p-8 md:p-10 rounded-3xl shadow-xl space-y-6">
+            <div class="space-y-2">
+                <span class="bg-white/20 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                    <span class="lang-en">Student Portal</span>
+                    <span class="lang-te hidden">విద్యార్థి పోర్టల్</span>
+                </span>
+                <h2 class="text-3xl font-bold">
+                    <span class="lang-en">Welcome Back to Class!</span>
+                    <span class="lang-te hidden">తరగతికి తిరిగి స్వాగతం!</span>
+                </h2>
+                <p class="text-teal-100">
+                    <span class="lang-en">Access your daily live sessions and course materials below.</span>
+                    <span class="lang-te hidden">మీ రోజువారీ లైవ్ సెషన్‌లు మరియు కోర్స్ మెటీరియల్‌లను క్రింద యాక్సెస్ చేయండి.</span>
+                </p>
+            </div>
+            <div class="bg-white text-slate-800 p-6 rounded-2xl shadow-lg inline-block space-y-3">
+                <h3 class="font-bold text-lg text-teal-900">
+                    <span class="lang-en">Live Class Room Access</span>
+                    <span class="lang-te hidden">లైవ్ క్లాస్ రూమ్ యాక్సెస్</span>
+                </h3>
+                <p class="text-sm text-slate-500">
+                    <span class="lang-en">Batch Schedule: Daily Classes & Flexible Timings</span>
+                    <span class="lang-te hidden">బ్యాచ్ షెడ్యూల్: రోజువారీ తరగతులు & అనువైన సమయాలు</span>
+                </p>
+                <a href="#" target="_blank" class="inline-block bg-gradient-to-r from-teal-600 to-cyan-600 text-white text-sm font-bold px-5 py-2.5 rounded-xl shadow hover:opacity-95 transition">
+                    <span class="lang-en">Join Live Interactive Session</span>
+                    <span class="lang-te hidden">లైవ్ ఇంటరాక్టివ్ సెషన్‌లో చేరండి</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- COURSES OFFERED -->
+        <section id="courses" class="space-y-8">
+            <div class="text-center space-y-2">
+                <span class="text-teal-600 text-xs font-bold tracking-widest uppercase bg-teal-50 px-3 py-1 rounded-full">
+                    <span class="lang-en">Courses Offered</span>
+                    <span class="lang-te hidden">మా ద్వారా నిర్వహించబడు కోర్సులు</span>
+                </span>
+                <h3 class="text-3xl font-extrabold text-slate-900">
+                    <span class="lang-en">Specialized Programs & Curriculum</span>
+                    <span class="lang-te hidden">ప్రత్యేక శిక్షణా కార్యక్రమాలు & సిలబస్</span>
+                </h3>
+                <p class="text-slate-600 max-w-xl mx-auto text-sm">
+                    <span class="lang-en">Comprehensive modules designed to eliminate hesitation and establish absolute command over English.</span>
+                    <span class="lang-te hidden">బిడియం తొలగించడానికి మరియు ఇంగ్లీష్ మీద పూర్తి పట్టు సాధించడానికి రూపొందించబడిన సమగ్ర మాడ్యూల్స్.</span>
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Course 1 -->
+                <div class="group bg-white p-8 rounded-3xl shadow-md border border-slate-100 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-teal-500 relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-teal-500 to-cyan-500"></div>
+                    <span class="text-xs font-bold text-teal-600 bg-teal-50 px-3 py-1 rounded-full">
+                        <span class="lang-en">Core Module</span>
+                        <span class="lang-te hidden">ప్రధాన మాడ్యూల్</span>
+                    </span>
+                    <h4 class="font-bold text-slate-900 text-xl mt-4 mb-2">
+                        <span class="lang-en">Grammar & Vocabulary</span>
+                        <span class="lang-te hidden">గ్రామర్ & పదసంపద</span>
+                    </h4>
+                    <p class="text-sm text-slate-600 leading-relaxed mb-4">
+                        <span class="lang-en">Master foundational grammatical structures, sentence building rules, and expand daily lexical resources effortlessly.</span>
+                        <span class="lang-te hidden">పునాది గ్రామర్ నియమాలు, వాక్య నిర్మాణ సూత్రాలను నేర్చుకోండి మరియు రోజువారీ పదసంపదను పెంచుకోండి.</span>
+                    </p>
+                    <div class="text-xs font-bold text-teal-700 bg-teal-50/50 p-3 rounded-xl border border-teal-100">
+                        <span class="lang-en">Structured Daily Practice</span>
+                        <span class="lang-te hidden">క్రమబద్ధమైన రోజువారీ అభ్యాసం</span>
+                    </div>
+                </div>
+
+                <!-- Course 2 -->
+                <div class="group bg-white p-8 rounded-3xl shadow-md border border-slate-100 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-cyan-500 relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-cyan-500 to-indigo-500"></div>
+                    <span class="text-xs font-bold text-cyan-600 bg-cyan-50 px-3.5 py-1.5 rounded-full">
+                        <span class="lang-en">Modern Application</span>
+                        <span class="lang-te hidden">ఆధునిక అప్లికేషన్</span>
+                    </span>
+                    <h4 class="font-bold text-slate-900 text-xl mt-4 mb-2">
+                        <span class="lang-en">Modern Usage & Functional English</span>
+                        <span class="lang-te hidden">మోడర్న్ యూసేజ్ & ఫంక్షనల్ ఇంగ్లీష్</span>
+                    </h4>
+                    <p class="text-sm text-slate-600 leading-relaxed mb-4">
+                        <span class="lang-en">Learn contemporary phraseology, conversational shortcuts, and practical application for real-life interactions.</span>
+                        <span class="lang-te hidden">సమకాలీన పదజాలం, సంభాషణ షార్ట్‌కట్‌లు మరియు నిజ జీవిత సంభాషణల కోసం ఆచరణాత్మక అభ్యాసం.</span>
+                    </p>
+                    <div class="text-xs font-bold text-cyan-700 bg-cyan-50/50 p-3 rounded-xl border border-cyan-100">
+                        <span class="lang-en">Situational Dialogues</span>
+                        <span class="lang-te hidden">సందర్భానుసార సంభాషణలు</span>
+                    </div>
+                </div>
+
+                <!-- Course 3 -->
+                <div class="group bg-white p-8 rounded-3xl shadow-md border border-slate-100 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-indigo-500 relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-indigo-500 to-purple-500"></div>
+                    <span class="text-xs font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full">
+                        <span class="lang-en">Advanced Training</span>
+                        <span class="lang-te hidden">అధునాతన శిక్షణ</span>
+                    </span>
+                    <h4 class="font-bold text-slate-900 text-xl mt-4 mb-2">
+                        <span class="lang-en">A Practice Course in Spoken English</span>
+                        <span class="lang-te hidden">స్పోకెన్ ఇంగ్లీష్ ప్రాక్టీస్ కోర్సు</span>
+                    </h4>
+                    <p class="text-sm text-slate-600 leading-relaxed mb-4">
+                        <span class="lang-en">Intensive interactive sessions supported by audio & video classes for immersive learning.</span>
+                        <span class="lang-te hidden">ఆడియో & వీడియో క్లాసుల ద్వారా ఇంటరాక్టివ్ శిక్షణ మరియు అభ్యాసం.</span>
+                    </p>
+                    <div class="text-xs font-bold text-indigo-700 bg-indigo-50/50 p-3 rounded-xl border border-indigo-100">
+                        <span class="lang-en">🎥 Audio & Video Learning Sessions</span>
+                        <span class="lang-te hidden">🎥 ఆడియో & వీడియో లెర్నింగ్ సెషన్స్</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- INTERACTIVE GALLERY CAROUSEL WITH LEFT/RIGHT ARROWS -->
+        <section id="gallery" class="space-y-8">
+            <div class="text-center space-y-2">
+                <span class="text-teal-600 text-xs font-bold tracking-widest uppercase bg-teal-50 px-3 py-1 rounded-full">
+                    <span class="lang-en">Institute Tour</span>
+                    <span class="lang-te hidden">ఇన్‌స్టిట్యూట్ టూర్</span>
+                </span>
+                <h3 class="text-3xl font-extrabold text-slate-900">
+                    <span class="lang-en">Inside Our Classroom & Facilities</span>
+                    <span class="lang-te hidden">మా క్లాస్‌రూమ్ & సౌకర్యాలు</span>
+                </h3>
+                <p class="text-slate-600 max-w-xl mx-auto text-sm">
+                    <span class="lang-en">Browse through our interactive learning spaces and audio-visual coaching setups in Nellore.</span>
+                    <span class="lang-te hidden">నెల్లూరులోని మా క్లాస్‌రూమ్‌లు మరియు ఆడియో-విజువల్ కోచింగ్ సెటప్‌లను వీక్షించండి.</span>
+                </p>
+            </div>
+
+            <!-- CAROUSEL CONTAINER -->
+            <div class="max-w-3xl mx-auto bg-white rounded-3xl shadow-xl border border-slate-100 overflow-hidden relative">
+                <!-- Image Wrapper -->
+                <div class="relative h-72 sm:h-96 bg-slate-900 overflow-hidden flex items-center justify-center">
+                    <img id="carousel-img" src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=900" alt="Gallery Image" class="w-full h-full object-cover transition-all duration-500">
+                    
+                    <!-- Left Arrow Button -->
+                    <button onclick="prevSlide()" class="absolute left-4 bg-teal-700/80 hover:bg-teal-700 text-white w-10 h-10 rounded-full flex items-center justify-center shadow-lg backdrop-blur-sm transition z-20">
+                        &#8592;
+                    </button>
+                    
+                    <!-- Right Arrow Button -->
+                    <button onclick="nextSlide()" class="absolute right-4 bg-teal-700/80 hover:bg-teal-700 text-white w-10 h-10 rounded-full flex items-center justify-center shadow-lg backdrop-blur-sm transition z-20">
+                        &#8594;
+                    </button>
+                </div>
+
+                <!-- Caption Area -->
+                <div class="p-6 text-center space-y-2 bg-white">
+                    <h4 id="carousel-title" class="font-bold text-slate-900 text-xl">
+                        <span class="lang-en">Interactive Audio-Visual Batch Room</span>
+                        <span class="lang-te hidden">ఇంటరాక్టివ్ ఆడియో-విజువల్ బ్యాచ్ రూమ్</span>
+                    </h4>
+                    <p id="carousel-desc" class="text-sm text-slate-600">
+                        <span class="lang-en">Equipped with modern displays for active listening practice and vocabulary building.</span>
+                        <span class="lang-te hidden">యాక్టివ్ లిజనింగ్ అభ్యాసం మరియు పదసంపద పెంపుదల కోసం ఆధునిక డిస్‌ప్లేలతో అమర్చబడింది.</span>
+                    </p>
+                    
+                    <!-- Dots Indicator -->
+                    <div class="flex justify-center gap-2 pt-3" id="carousel-dots">
+                        <button onclick="goToSlide(0)" class="w-3 h-3 rounded-full bg-teal-600 transition"></button>
+                        <button onclick="goToSlide(1)" class="w-3 h-3 rounded-full bg-slate-300 transition"></button>
+                        <button onclick="goToSlide(2)" class="w-3 h-3 rounded-full bg-slate-300 transition"></button>
+                        <button onclick="goToSlide(3)" class="w-3 h-3 rounded-full bg-slate-300 transition"></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- WHO CAN JOIN & WHAT WE TEACH -->
+        <section id="about" class="grid md:grid-cols-2 gap-8">
+            <div class="bg-white p-8 rounded-3xl shadow-lg shadow-slate-200/50 border border-slate-100 space-y-4">
+                <div class="w-12 h-12 rounded-2xl bg-teal-50 text-teal-600 flex items-center justify-center font-bold text-xl shadow-inner">🎯</div>
+                <h3 class="text-2xl font-bold text-slate-900">
+                    <span class="lang-en">Who Can Join Our Course?</span>
+                    <span class="lang-te hidden">ఈ కోర్సు ఎవరు చేరవచ్చు?</span>
+                </h3>
+                <ul class="space-y-3 text-slate-600 text-sm leading-relaxed">
+                    <li class="flex items-start gap-2">
+                        <strong class="text-slate-800">
+                            <span class="lang-en">School & College Students:</span>
+                            <span class="lang-te hidden">స్కూల్ & కాలేజ్ విద్యార్థులు:</span>
+                        </strong> 
+                        <span class="lang-en">Overcome stage fear and build sentence-building intuition.</span>
+                        <span class="lang-te hidden">స్టేజ్ భయాన్ని పోగొట్టుకోండి మరియు వాక్య నిర్మాణ నైపుణ్యాలను పెంచుకోండి.</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <strong class="text-slate-800">
+                            <span class="lang-en">Job Seekers:</span>
+                            <span class="lang-te hidden">ఉద్యోగార్థులు:</span>
+                        </strong> 
+                        <span class="lang-en">Crack corporate job interviews and group discussions with poise.</span>
+                        <span class="lang-te hidden">కార్పొరేట్ ఉద్యోగ ఇంటర్వ్యూలు మరియు గ్రూప్ డిస్కషన్లను ఆత్మవిశ్వాసంతో సాధించండి.</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <strong class="text-slate-800">
+                            <span class="lang-en">Working Professionals:</span>
+                            <span class="lang-te hidden">ఉద్యోగస్తులు:</span>
+                        </strong> 
+                        <span class="lang-en">Upgrade workplace email etiquette and client communication.</span>
+                        <span class="lang-te hidden">కార్యాలయ ఈమెయిల్ సంభాషణ మరియు క్లైంట్ కమ్యూనికేషన్‌ను మెరుగుపరచుకోండి.</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <strong class="text-slate-800">
+                            <span class="lang-en">Homemakers:</span>
+                            <span class="lang-te hidden">గృహిణులు:</span>
+                        </strong> 
+                        <span class="lang-en">Gain absolute fluency for daily life and family settings.</span>
+                        <span class="lang-te hidden">రోజువారీ జీవితంలో మరియు కుటుంబ వాతావరణంలో అనర్గళంగా మాట్లాడండి.</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="bg-white p-8 rounded-3xl shadow-lg shadow-slate-200/50 border border-slate-100 space-y-4">
+                <div class="w-12 h-12 rounded-2xl bg-cyan-50 text-cyan-600 flex items-center justify-center font-bold text-xl shadow-inner">📘</div>
+                <h3 class="text-2xl font-bold text-slate-900">
+                    <span class="lang-en">Special Facilities Available</span>
+                    <span class="lang-te hidden">ప్రత్యేక సౌకర్యాలు అందుబాటులో ఉన్నాయి</span>
+                </h3>
+                <ul class="space-y-3 text-slate-600 text-sm leading-relaxed">
+                    <li class="flex items-start gap-2">
+                        <strong class="text-slate-800">
+                            <span class="lang-en">Online Classes:</span>
+                            <span class="lang-te hidden">ఆన్‌లైన్ క్లాసులు:</span>
+                        </strong> 
+                        <span class="lang-en">Attend sessions remotely if unable to travel to the center.</span>
+                        <span class="lang-te hidden">సెంటర్‌కు రలేని వారి కోసం రిమోట్ ఆన్‌లైన్ తరగతులు.</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <strong class="text-slate-800">
+                            <span class="lang-en">Home Tuitions:</span>
+                            <span class="lang-te hidden">హోమ్ ట్యూషన్స్:</span>
+                        </strong> 
+                        <span class="lang-en">Personalized one-on-one coaching right at your residence.</span>
+                        <span class="lang-te hidden">మీ నివాసంలోనే వ్యక్తిగత వన్-ఆన్-వన్ కోచింగ్.</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <strong class="text-slate-800">
+                            <span class="lang-en">Audio & Video Learning:</span>
+                            <span class="lang-te hidden">ఆడియో & వీడియో లెర్నింగ్:</span>
+                        </strong> 
+                        <span class="lang-en">Advanced visual learning methods for accurate accent and pronunciation.</span>
+                        <span class="lang-te hidden">సరైన ఉచ్ఛారణ మరియు యాస కోసం ఆధునిక విజువల్ లెర్నింగ్ పద్ధతులు.</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <strong class="text-slate-800">
+                            <span class="lang-en">Central Location in Nellore:</span>
+                            <span class="lang-te hidden">నెల్లూరులో సెంట్రల్ లొకేషన్:</span>
+                        </strong> 
+                        <span class="lang-en">Easily accessible behind Mahalakshmi Temple, VRC Centre.</span>
+                        <span class="lang-te hidden">మహాలక్ష్మి ఆలయం వెనుక, విఆర్సి సెంటర్, నెల్లూరు.</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- TEACHER PROFILE SECTION -->
+        <section id="teacher" class="bg-white p-8 md:p-12 rounded-3xl shadow-lg border border-slate-100">
+            <div class="flex flex-col md:flex-row gap-10 items-center">
+                <div class="w-52 h-52 rounded-3xl bg-slate-100 overflow-hidden flex-shrink-0 border-4 border-teal-100 shadow-xl relative group">
+                    <img id="teacher-img" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400" alt="Chandu" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                </div>
+                <div class="space-y-4 text-center md:text-left flex-grow">
+                    <span class="text-xs font-bold text-teal-700 bg-teal-50 px-3.5 py-1.5 rounded-full uppercase tracking-wider">
+                        <span class="lang-en">Lead Instructor</span>
+                        <span class="lang-te hidden">లీడ్ ఇన్‌స్ట్రక్టర్</span>
+                    </span>
+                    <h3 id="teacher-name" class="text-3xl md:text-4xl font-extrabold text-slate-900">
+                        <span class="lang-en">Chandu</span>
+                        <span class="lang-te hidden">శ్రీ చందు</span>
+                    </h3>
+                    <p id="teacher-qual" class="text-teal-600 font-bold text-base">
+                        <span class="lang-en">Spoken English & Communication Specialist</span>
+                        <span class="lang-te hidden">స్పోకెన్ ఇంగ్లీష్ & కమ్యూనికేషన్ స్పెషలిస్ట్</span>
+                    </p>
+                    <p id="teacher-bio" class="text-slate-600 text-sm md:text-base leading-relaxed">
+                        <span class="lang-en">Guiding learners across Nellore to conquer language barriers. With structured modules spanning grammar, vocabulary, modern usage, and audio-visual classes, we transform hesitation into absolute speaking fluency.</span>
+                        <span class="lang-te hidden">నెల్లూరు వ్యాప్తంగా అభ్యాసకులకు భాషా అడ్డంకులను అధిగమించడానికి మార్గనిర్దేశం చేస్తున్నారు. గ్రామర్, పదసంపద, మోడర్న్ యూసేజ్ మరియు ఆడియో-విజువల్ తరగతులతో మీ సంకోచాన్ని అనర్గళమైన ప్రసంగంగా మారుస్తాము.</span>
+                    </p>
+                    
+                    <!-- Admin Edit Button Trigger -->
+                    <div id="admin-edit-trigger" class="hidden pt-2">
+                        <button onclick="openEditModal()" class="bg-slate-900 text-white text-xs px-4 py-2.5 rounded-xl font-bold hover:bg-slate-800 transition shadow">⚙️ Edit Teacher Profile</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ADMIN PANEL -->
+        <section id="admin-section" class="hidden space-y-8 bg-white p-8 md:p-12 rounded-3xl shadow-xl border-2 border-rose-100">
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-4 border-b border-slate-100 pb-6">
+                <div>
+                    <h2 class="text-2xl font-extrabold text-rose-600">🔒 Admin Dashboard & Analytics</h2>
+                    <p class="text-slate-500 text-sm">Real-time breakdown of student enrollments, categories, and regional distribution.</p>
+                </div>
+                <button onclick="loadAdminData()" class="bg-slate-900 text-white text-xs px-4 py-2.5 rounded-xl font-bold hover:bg-slate-800 transition shadow">Refresh Analytics</button>
+            </div>
+
+            <!-- ANALYTICS CARDS -->
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 space-y-3">
+                    <h4 class="font-bold text-slate-900 text-base">📊 Category Breakdown</h4>
+                    <div id="category-stats" class="space-y-2 text-sm text-slate-600"></div>
+                </div>
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 space-y-3">
+                    <h4 class="font-bold text-slate-900 text-base">📍 Region Breakdown</h4>
+                    <div id="region-stats" class="space-y-2 text-sm text-slate-600"></div>
+                </div>
+            </div>
+            
+            <div class="space-y-4">
+                <h4 class="font-bold text-slate-900 text-lg">Registered Students List & Goals</h4>
+                <div class="overflow-x-auto rounded-2xl border border-slate-200">
+                    <table class="w-full text-left border-collapse text-sm">
+                        <thead>
+                            <tr class="bg-slate-50 border-b border-slate-200 text-slate-600">
+                                <th class="p-4">Email</th>
+                                <th class="p-4">Phone</th>
+                                <th class="p-4">Category</th>
+                                <th class="p-4">Region</th>
+                                <th class="p-4">Lagging / Goals</th>
+                                <th class="p-4">Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="student-table-body" class="divide-y divide-slate-100"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ADMIN LOGIN MODAL -->
+    <div id="admin-login-modal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex justify-center items-center z-50 p-4">
+        <div class="bg-white p-8 rounded-3xl max-w-sm w-full space-y-4 shadow-2xl border border-slate-100">
+            <h3 class="text-xl font-bold text-slate-900">Admin Login</h3>
+            <p class="text-xs text-slate-500">Contact: 9963951240</p>
+            <div class="space-y-3">
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Password</label>
+                    <input type="password" id="admin-pass-input" placeholder="Admin@123" class="w-full p-3 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                </div>
+            </div>
+            <div class="flex justify-end gap-3 pt-2">
+                <button onclick="closeAdminModal()" class="px-4 py-2 bg-slate-100 text-slate-700 rounded-xl text-sm font-bold hover:bg-slate-200 transition">Cancel</button>
+                <button onclick="loginAsAdmin()" class="px-4 py-2 bg-slate-900 text-white rounded-xl text-sm font-bold hover:bg-black transition">Login</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADMIN EDIT TEACHER MODAL -->
+    <div id="edit-modal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex justify-center items-center z-50 p-4">
+        <div class="bg-white p-8 rounded-3xl max-w-md w-full space-y-4 shadow-2xl border border-slate-100">
+            <h3 class="text-xl font-bold text-slate-900">Edit Teacher Profile</h3>
+            <div class="space-y-3">
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Name</label>
+                    <input type="text" id="edit-name" class="w-full p-3 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Qualification / Title</label>
+                    <input type="text" id="edit-qual" class="w-full p-3 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 uppercase mb-1">GitHub Raw Image URL</label>
+                    <input type="text" id="edit-img" placeholder="https://raw.githubusercontent.com/..." class="w-full p-3 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Short Bio</label>
+                    <textarea id="edit-bio" rows="3" class="w-full p-3 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-teal-500 focus:outline-none"></textarea>
+                </div>
+            </div>
+            <div class="flex justify-end gap-3 pt-2">
+                <button onclick="closeEditModal()" class="px-5 py-2 bg-slate-100 text-slate-700 rounded-xl text-sm font-bold hover:bg-slate-200 transition">Cancel</button>
+                <button onclick="saveTeacherProfile()" class="px-5 py-2.5 bg-gradient-to-r from-teal-600 to-cyan-600 text-white rounded-xl text-sm font-bold shadow hover:opacity-95 transition">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 text-center py-10 mt-24 text-sm border-t border-slate-800">
+        <div class="max-w-6xl mx-auto px-4 space-y-3">
+            <p class="font-bold text-white text-base">
+                <span class="lang-en">Sri Chandu Spoken English</span>
+                <span class="lang-te hidden">శ్రీ చందు స్పోకెన్ ఇంగ్లీష్</span>
+            </p>
+            <p class="text-xs text-slate-300">📍 <span class="lang-en">Chakali Street, Behind Mahalakshmi Temple, VRC Centre, NELLORE.</span><span class="lang-te hidden">చాకలి వీధి, మహాలక్ష్మి ఆలయం వెనుక, విఆర్సి సెంటర్, నెల్లూరు.</span></p>
+            <p class="text-xs text-slate-400">Cell: 9963951240, 9052052715</p>
+            <p>© 2026 Sri Chandu Spoken English. <span class="lang-en">All rights reserved.</span><span class="lang-te hidden">సర్వ హక్కులు ప్రత్యేకించబడినవి.</span></p>
+        </div>
+    </footer>
+
+    <script>
+        // SUPABASE CONFIGURATION
+        const SUPABASE_URL = 'https://pbjjlukassjhoujwznzs.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_sMPfomE6WfV5txeGx4OQ2A_5rqqp0xW';
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        
+        const ADMIN_SECRET_PASSWORD = 'Admin@123';
+
+        // CAROUSEL DATA ARRAY
+        const gallerySlides = [
+            {
+                img: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=900",
+                titleEn: "Interactive Audio-Visual Batch Room",
+                titleTe: "ఇంటరాక్టివ్ ఆడియో-విజువల్ బ్యాచ్ రూమ్",
+                descEn: "Equipped with modern displays for active listening practice and vocabulary building.",
+                descTe: "యాక్టివ్ లిజనింగ్ అభ్యాసం మరియు పదసంపద పెంపుదల కోసం ఆధునిక డిస్‌ప్లేలతో అమర్చబడింది."
+            },
+            {
+                img: "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&q=80&w=900",
+                titleEn: "Spoken English Practice Session",
+                titleTe: "స్పోకెన్ ఇంగ్లీష్ ప్రాక్టీస్ సెషన్",
+                descEn: "Small group setups ensuring personal attention and conversational confidence for every student.",
+                descTe: "ప్రతి విద్యార్థికి వ్యక్తిగత శ్రద్ధ మరియు సంభాషణ ఆత్మవిశ్వాసాన్ని అందించే చిన్న సమూహ ఏర్పాట్లు."
+            },
+            {
+                img: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&q=80&w=900",
+                titleEn: "Study Desk & Resource Centre",
+                titleTe: "స్టడీ డెస్క్ & రిసోర్స్ సెంటర్",
+                descEn: "Dedicated grammar materials, flashcards, and reference books for comprehensive learning.",
+                descTe: "సమగ్ర అభ్యాసం కోసం అంకితమైన గ్రామర్ మెటీరియల్స్, ఫ్లాష్‌కార్డ్‌లు మరియు రెఫరెన్స్ పుస్తకాలు."
+            },
+            {
+                img: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=900",
+                titleEn: "Audio & Video Learning Classes",
+                titleTe: "ఆడియో & వీడియో లెర్నింగ్ తరగతులు",
+                descEn: "Immersive learning sessions demonstrating correct pronunciation, intonation, and conversational usage.",
+                descTe: "సరైన ఉచ్ఛారణ, స్వరం మరియు సంభాషణ వినియోగాన్ని ప్రదర్శించే లీనమయ్యే అభ్యాస సెషన్‌లు."
+            }
+        ];
+
+        let currentSlideIndex = 0;
+
+        function updateCarousel() {
+            const slide = gallerySlides[currentSlideIndex];
+            document.getElementById('carousel-img').src = slide.img;
+            
+            const currentLang = document.body.getAttribute('data-lang');
+            document.getElementById('carousel-title').innerText = currentLang === 'te' ? slide.titleTe : slide.titleEn;
+            document.getElementById('carousel-desc').innerText = currentLang === 'te' ? slide.descTe : slide.descEn;
+
+            const dotsContainer = document.getElementById('carousel-dots');
+            dotsContainer.innerHTML = gallerySlides.map((_, i) => `
+                <button onclick="goToSlide(${i})" class="w-3 h-3 rounded-full transition ${i === currentSlideIndex ? 'bg-teal-600 scale-110' : 'bg-slate-300'}"></button>
+            `).join('');
+        }
+
+        function nextSlide() {
+            currentSlideIndex = (currentSlideIndex + 1) % gallerySlides.length;
+            updateCarousel();
+        }
+
+        function prevSlide() {
+            currentSlideIndex = (currentSlideIndex - 1 + gallerySlides.length) % gallerySlides.length;
+            updateCarousel();
+        }
+
+        function goToSlide(index) {
+            currentSlideIndex = index;
+            updateCarousel();
+        }
+
+        // LANGUAGE TOGGLE SYSTEM (Default: English)
+        function toggleLanguage() {
+            const body = document.body;
+            const currentLang = body.getAttribute('data-lang');
+            const newLang = currentLang === 'en' ? 'te' : 'en';
+            body.setAttribute('data-lang', newLang);
+
+            const enElements = document.querySelectorAll('.lang-en');
+            const teElements = document.querySelectorAll('.lang-te');
+
+            if (newLang === 'te') {
+                enElements.forEach(el => el.classList.add('hidden'));
+                teElements.forEach(el => el.classList.remove('hidden'));
+                document.getElementById('lang-btn-text').innerText = 'English';
+                document.getElementById('lang-btn-mobile').innerText = 'English';
+            } else {
+                teElements.forEach(el => el.classList.add('hidden'));
+                enElements.forEach(el => el.classList.remove('hidden'));
+                document.getElementById('lang-btn-text').innerText = 'తెలుగు (Telugu)';
+                document.getElementById('lang-btn-mobile').innerText = 'తెలుగు';
+            }
+            localStorage.setItem('preferred_lang', newLang);
+            updateCarousel();
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('preferred_lang') || 'en';
+            if (savedLang === 'te') {
+                document.body.setAttribute('data-lang', 'te');
+                document.querySelectorAll('.lang-en').forEach(el => el.classList.add('hidden'));
+                document.querySelectorAll('.lang-te').forEach(el => el.classList.remove('hidden'));
+                document.getElementById('lang-btn-text').innerText = 'English';
+                document.getElementById('lang-btn-mobile').innerText = 'English';
+            }
+
+            const loggedStudent = localStorage.getItem('logged_student');
+            if (loggedStudent) {
+                document.getElementById('register').classList.add('hidden');
+                document.getElementById('dashboard-section').classList.remove('hidden');
+                document.getElementById('user-info').classList.remove('hidden');
+                document.getElementById('user-email').innerText = loggedStudent;
+            }
+            loadTeacherProfile();
+            updateCarousel();
+        });
+
+        function checkCategoryOther() {
+            const cat = document.getElementById('category').value;
+            const otherBox = document.getElementById('other-category-box');
+            if (cat === 'Others') {
+                otherBox.classList.remove('hidden');
+            } else {
+                otherBox.classList.add('hidden');
+            }
+        }
+
+        async function handleAuth(event) {
+            event.preventDefault();
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const region = document.getElementById('region').value;
+            let category = document.getElementById('category').value;
+            if (category === 'Others') {
+                category = document.getElementById('other-category-text').value || 'Others';
+            }
+            const description = document.getElementById('description').value;
+
+            const { error } = await supabaseClient.from('profiles').insert([{ 
+                email, 
+                phone, 
+                region, 
+                category, 
+                description 
+            }]);
+
+            if (error) {
+                alert('Registration error: ' + error.message);
+                return;
+            }
+
+            alert('Registration successful! Welcome to Sri Chandu Spoken English.');
+            document.getElementById('register').classList.add('hidden');
+            document.getElementById('dashboard-section').classList.remove('hidden');
+            document.getElementById('user-info').classList.remove('hidden');
+            document.getElementById('user-email').innerText = email;
+            localStorage.setItem('logged_student', email);
+        }
+
+        function logout() {
+            localStorage.removeItem('logged_student');
+            location.reload();
+        }
+
+        function openAdminModal() {
+            document.getElementById('admin-login-modal').classList.remove('hidden');
+        }
+
+        function closeAdminModal() {
+            document.getElementById('admin-login-modal').classList.add('hidden');
+        }
+
+        function loginAsAdmin() {
+            const pass = document.getElementById('admin-pass-input').value;
+            if (pass === ADMIN_SECRET_PASSWORD) {
+                closeAdminModal();
+                document.getElementById('admin-section').classList.remove('hidden');
+                document.getElementById('admin-edit-trigger').classList.remove('hidden');
+                loadAdminData();
+                alert('Admin Login Successful!');
+            } else {
+                alert('Incorrect Admin Password! (Use Admin@123)');
+            }
+        }
+
+        async function loadAdminData() {
+            const { data, error } = await supabaseClient.from('profiles').select('*').order('created_at', { ascending: false });
+            if (error) {
+                alert('Error loading admin records: ' + error.message);
+                return;
+            }
+
+            const tbody = document.getElementById('student-table-body');
+            tbody.innerHTML = '';
+
+            const categoryCounts = {};
+            const regionCounts = {};
+
+            data.forEach(student => {
+                const tr = document.createElement('tr');
+                tr.className = 'border-b border-slate-50 hover:bg-slate-50/50';
+                tr.innerHTML = `
+                    <td class="p-4 font-medium text-slate-900">${student.email || 'N/A'}</td>
+                    <td class="p-4 text-slate-600">${student.phone || 'N/A'}</td>
+                    <td class="p-4"><span class="bg-teal-50 text-teal-700 px-2.5 py-1 rounded-full text-xs font-semibold">${student.category || 'N/A'}</span></td>
+                    <td class="p-4 text-slate-600">${student.region || 'N/A'}</td>
+                    <td class="p-4 text-slate-600 max-w-xs truncate">${student.description || 'N/A'}</td>
+                    <td class="p-4 text-slate-400 text-xs">${new Date(student.created_at).toLocaleDateString()}</td>
+                `;
+                tbody.appendChild(tr);
+
+                const cat = student.category || 'Unspecified';
+                categoryCounts[cat] = (categoryCounts[cat] || 0) + 1;
+
+                const reg = student.region || 'Unspecified';
+                regionCounts[reg] = (regionCounts[reg] || 0) + 1;
+            });
+
+            const catDiv = document.getElementById('category-stats');
+            catDiv.innerHTML = Object.entries(categoryCounts).map(([k, v]) => `<div class="flex justify-between border-b border-slate-100 pb-1"><span>${k}</span><span class="font-bold">${v}</span></div>`).join('') || 'No data';
+
+            const regDiv = document.getElementById('region-stats');
+            regDiv.innerHTML = Object.entries(regionCounts).map(([k, v]) => `<div class="flex justify-between border-b border-slate-100 pb-1"><span>${k}</span><span class="font-bold">${v}</span></div>`).join('') || 'No data';
+        }
+
+        function openEditModal() {
+            document.getElementById('edit-name').value = document.getElementById('teacher-name').innerText;
+            document.getElementById('edit-qual').value = document.getElementById('teacher-qual').innerText;
+            document.getElementById('edit-bio').value = document.getElementById('teacher-bio').innerText;
+            document.getElementById('edit-img').value = document.getElementById('teacher-img').src;
+            document.getElementById('edit-modal').classList.remove('hidden');
+        }
+
+        function closeEditModal() {
+            document.getElementById('edit-modal').classList.add('hidden');
+        }
+
+        async function saveTeacherProfile() {
+            const name = document.getElementById('edit-name').value;
+            const qual = document.getElementById('edit-qual').value;
+            const bio = document.getElementById('edit-bio').value;
+            const img = document.getElementById('edit-img').value;
+
+            const profileData = { name, qual, bio, img };
+            localStorage.setItem('teacher_profile', JSON.stringify(profileData));
+
+            document.getElementById('teacher-name').innerText = name;
+            document.getElementById('teacher-qual').innerText = qual;
+            document.getElementById('teacher-bio').innerText = bio;
+            if(img) document.getElementById('teacher-img').src = img;
+
+            closeEditModal();
+            alert('Teacher profile updated successfully!');
+        }
+
+        function loadTeacherProfile() {
+            const saved = localStorage.getItem('teacher_profile');
+            if (saved) {
+                const profile = JSON.parse(saved);
+                if(profile.name) document.getElementById('teacher-name').innerText = profile.name;
+                if(profile.qual) document.getElementById('teacher-qual').innerText = profile.qual;
+                if(profile.bio) document.getElementById('teacher-bio').innerText = profile.bio;
+                if(profile.img) document.getElementById('teacher-img').src = profile.img;
+            }
+        }
+    </script>
+</body>
+</html>
