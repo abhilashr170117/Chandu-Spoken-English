@@ -353,7 +353,7 @@
             <div class="max-w-3xl mx-auto bg-white rounded-3xl shadow-xl border border-slate-100 overflow-hidden relative">
                 <!-- Image Wrapper -->
                 <div class="relative h-72 sm:h-96 bg-slate-900 overflow-hidden flex items-center justify-center">
-                    <img id="carousel-img" src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=900" alt="Gallery Image" class="w-full h-full object-cover transition-all duration-500">
+                    <img id="carousel-img" src="galimg1.jpeg" alt="Gallery Image" class="w-full h-full object-cover transition-all duration-500">
                     
                     <!-- Left Arrow Button -->
                     <button onclick="prevSlide()" class="absolute left-4 bg-teal-700/80 hover:bg-teal-700 text-white w-10 h-10 rounded-full flex items-center justify-center shadow-lg backdrop-blur-sm transition z-20">
@@ -619,35 +619,49 @@
         
         const ADMIN_SECRET_PASSWORD = 'Admin@123';
 
-        // CAROUSEL DATA ARRAY
+        // CAROUSEL DATA ARRAY (Updated with your local images)
         const gallerySlides = [
             {
-                img: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=900",
+                img: "galimg1.jpeg",
                 titleEn: "Interactive Audio-Visual Batch Room",
                 titleTe: "ఇంటరాక్టివ్ ఆడియో-విజువల్ బ్యాచ్ రూమ్",
                 descEn: "Equipped with modern displays for active listening practice and vocabulary building.",
                 descTe: "యాక్టివ్ లిజనింగ్ అభ్యాసం మరియు పదసంపద పెంపుదల కోసం ఆధునిక డిస్‌ప్లేలతో అమర్చబడింది."
             },
             {
-                img: "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&q=80&w=900",
+                img: "WhatsApp Image 2026-07-28 at 8.47.02 PM.jpeg",
                 titleEn: "Spoken English Practice Session",
                 titleTe: "స్పోకెన్ ఇంగ్లీష్ ప్రాక్టీస్ సెషన్",
                 descEn: "Small group setups ensuring personal attention and conversational confidence for every student.",
                 descTe: "ప్రతి విద్యార్థికి వ్యక్తిగత శ్రద్ధ మరియు సంభాషణ ఆత్మవిశ్వాసాన్ని అందించే చిన్న సమూహ ఏర్పాట్లు."
             },
             {
-                img: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&q=80&w=900",
+                img: "WhatsApp Image 2026-07-28 at 8.47.02 PM (1).jpeg",
                 titleEn: "Study Desk & Resource Centre",
                 titleTe: "స్టడీ డెస్క్ & రిసోర్స్ సెంటర్",
                 descEn: "Dedicated grammar materials, flashcards, and reference books for comprehensive learning.",
                 descTe: "సమగ్ర అభ్యాసం కోసం అంకితమైన గ్రామర్ మెటీరియల్స్, ఫ్లాష్‌కార్డ్‌లు మరియు రెఫరెన్స్ పుస్తకాలు."
             },
             {
-                img: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=900",
-                titleEn: "Audio & Video Learning Classes",
-                titleTe: "ఆడియో & వీడియో లెర్నింగ్ తరగతులు",
-                descEn: "Immersive learning sessions demonstrating correct pronunciation, intonation, and conversational usage.",
-                descTe: "సరైన ఉచ్ఛారణ, స్వరం మరియు సంభాషణ వినియోగాన్ని ప్రదర్శించే లీనమయ్యే అభ్యాస సెషన్‌లు."
+                img: "WhatsApp Image 2026-07-28 at 8.47.03 PM.jpeg",
+                titleEn: "Classroom Event & Gathering",
+                titleTe: "తరగతి గది ఈవెంట్ & సమావేశం",
+                descEn: "Celebrating milestones and interactive community gatherings with our batches.",
+                descTe: "మా బ్యాచ్‌లతో మైలురాళ్ళు మరియు ఇంటరాక్టివ్ కమ్యూనిటీ సమావేశాలను జరుపుకోవడం."
+            },
+            {
+                img: "WhatsApp Image 2026-07-28 at 8.47.03 PM (1).jpeg",
+                titleEn: "Board & Explanation Classes",
+                titleTe: "బోర్డు & వివరణ తరగతులు",
+                descEn: "Detailed grammar breakdowns and structural sentence formatting on the board.",
+                descTe: "బోర్డుపై వివరణాత్మక గ్రామర్ విశ్లేషణ మరియు స్ట్రక్చరల్ వాక్య నిర్మాణం."
+            },
+            {
+                img: "WhatsApp Image 2026-07-28 at 8.47.03 PM (2).jpeg",
+                titleEn: "Summer Special Batch Launch",
+                titleTe: "సమ్మర్ స్పెషల్ బ్యాచ్ ప్రారంభం",
+                descEn: "Special intensive programs tailored for fast-paced communication mastery.",
+                descTe: "వేగవంతమైన కమ్యూనికేషన్ నైపుణ్యం కోసం ప్రత్యేక ఇంటెన్సివ్ ప్రోగ్రామ్‌లు."
             }
         ];
 
@@ -655,7 +669,11 @@
 
         function updateCarousel() {
             const slide = gallerySlides[currentSlideIndex];
-            document.getElementById('carousel-img').src = slide.img;
+            const imgElement = document.getElementById('carousel-img');
+            imgElement.src = slide.img;
+            
+            // Adjust styling dynamically to handle varied photo orientations seamlessly without distortion
+            imgElement.className = "w-full h-full object-contain bg-slate-900 transition duration-300";
             
             const currentLang = document.body.getAttribute('data-lang');
             document.getElementById('carousel-title').innerText = currentLang === 'te' ? slide.titleTe : slide.titleEn;
